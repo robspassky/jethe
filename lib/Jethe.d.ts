@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import * as http from "http";
-export declare class Server {
+export declare class Jethe {
     private srv;
     private routes;
     private dirs;

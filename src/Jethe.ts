@@ -44,7 +44,7 @@ class FileDir {
 
 }
 
-export class Server {
+export class Jethe {
   private srv: http.Server;
   private routes: Route[];
   private dirs: FileDir[];
