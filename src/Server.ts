@@ -32,9 +32,8 @@ class FileDir {
   }
 
   public serve(req: http.IncomingMessage, res: http.ServerResponse, cb: (err: boolean) => void ) {
-    console.error(`FileDir serve: ${this.dir}`);
     req.url = this.extractFilePath(req.url);
-    this.srv(req, res, (err: any) => { console.error(`Failed to serve file: ${err}`); cb(false); });
+    this.srv(req, res, (err: any) => { cb(false); });
   }
 
   private extractFilePath(url: string): string {
@@ -86,7 +85,6 @@ export class Server {
         rsp.end();
         return;
       }
-      console.error(`Serving from: ${dirs[idx].dir}`);
       if (dirs[idx].matches(req)) {
         dirs[idx].serve(req, rsp, (served) => {
           if (served) { return; }

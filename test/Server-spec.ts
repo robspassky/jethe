@@ -56,9 +56,7 @@ describe("server", function() {
     let srv = new Server();
     srv.addFileDir("/files", "./test/docroot");
     srv.listen(0);
-    console.error("sending request");
     Utils.wget(`http://localhost:${srv.port}/files/index.html`, (err: any, body: string) => {
-      console.error("got response");
       if (err) { done(err); return; }
       assert(body.trim() === "<html>foo</html>", `body does not match: ${body}`);
       done();
@@ -70,7 +68,6 @@ describe("server", function() {
     srv.addFileDir("/doc", "./test/docroot");
     srv.addFileDir("/www", "./test/docroot2");
     srv.listen(0);
-    console.error("sending request");
     Utils.wget(`http://localhost:${srv.port}/www/index.html`, (err: any, body: string) => {
       if (err) { done(err); return; }
       assert(body.trim() === "<html>foo2</html>", `body does not match: ${body}`);
@@ -79,6 +76,16 @@ describe("server", function() {
         assert(body.trim() === "<html>foo</html>", `body does not match: ${body}`);
         done();
       });
+    });
+  });
+
+  it("should return 404 on missing file", function (done) {
+    let srv = new Server();
+    srv.addFileDir("/files", "./test/docroot");
+    srv.listen(0);
+    Utils.wget(`http://localhost:${srv.port}/files/fjksdajsfkl/index.html`, (err: any, body: string) => {
+      assert(err, "should result in an error");
+      done();
     });
   });
 
