@@ -1,6 +1,6 @@
 {
   "name": "jethe",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Typescript web framework",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
